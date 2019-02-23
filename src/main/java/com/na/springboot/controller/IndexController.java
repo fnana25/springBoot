@@ -2,7 +2,10 @@ package com.na.springboot.controller;
 
 import com.na.springboot.controller.models.User;
 import io.swagger.annotations.*;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
+
 
 /**
  * 首页
@@ -10,10 +13,14 @@ import org.springframework.web.bind.annotation.*;
  * @author fengna
  * @date 19/2/21 21:33
  */
+@Slf4j
 @RestController
 @RequestMapping("index")
 @Api(description = "首页相关API")
 public class IndexController {
+
+    @Value("${com.na.title}")
+    private String title;
 
     /**
      * 首页
