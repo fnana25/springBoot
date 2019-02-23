@@ -1,23 +1,27 @@
 package com.na.springboot.controller;
 
 import com.na.springboot.controller.models.User;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.*;
 
 /**
- * TestController
+ * IndexController
  *
  * @author fengna
  * @date 19/2/21 21:33
  */
 @RestController
+@Api(description = "首页相关API")
 public class IndexController {
 
     /**
      * 首页
      * @return hello
      */
-    @RequestMapping("index")
+    @ApiOperation(value="首页", notes="首页展示")
+    @GetMapping("index")
     public String index(){
 
         return "hello";
@@ -27,9 +31,11 @@ public class IndexController {
      * 获取user
      * @return user
      */
-    @RequestMapping("user")
-    public User getUser(){
+    @ApiOperation(value="获取用户详细信息", notes="根据url的id来获取用户详细信息")
+    @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "Long", paramType = "path")
+    @GetMapping("user/{id}")
+    public User getUser(@PathVariable Long id){
 
-        return new User("fengna","692098869@qq.com");
+        return new User(1L,"fengna","692098869@qq.com");
     }
 }
