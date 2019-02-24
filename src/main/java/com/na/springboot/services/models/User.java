@@ -1,4 +1,4 @@
-package com.na.springboot.controller.models;
+package com.na.springboot.services.models;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
