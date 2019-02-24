@@ -17,8 +17,13 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class UserServerImpl implements UserService {
 
+
+    private final UserRepository userRepository;
+
     @Autowired
-    private UserRepository userRepository;
+    public UserServerImpl(UserRepository userRepository){
+        this.userRepository = userRepository;
+    }
 
     @Override
     public User findByName(String name) {
