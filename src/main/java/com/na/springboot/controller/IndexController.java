@@ -35,7 +35,7 @@ public class IndexController {
     @ApiOperation(value="首页", notes="首页展示")
     public String index(){
 
-        return "hello";
+        return "index";
     }
 
     /**
