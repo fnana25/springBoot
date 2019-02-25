@@ -49,14 +49,14 @@ public class IndexController {
             @ApiResponse(code = 400, message = "参数有误"),
             @ApiResponse(code = 404, message = "路径有误")
     })
-    public User getUser(@PathVariable Long id){
+    public User getUser(@PathVariable("id") Long id){
 
-        return new User(id,"fengna","692098869@qq.com");
+        return userService.findById(id);
     }
 
-    @GetMapping("user/{name}")
+    @GetMapping("user")
     @ApiOperation("获取用户信息")
-    public User getUser(@ApiParam(value = "姓名",required = true) @PathVariable String name){
+    public User getUser(@ApiParam(value = "姓名",required = true) @RequestParam(value = "name") String name){
 
         return userService.findByName(name);
     }

@@ -1,11 +1,9 @@
 package com.na.springboot.entities;
 
+import lombok.Data;
 import org.hibernate.annotations.GeneratorType;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
@@ -14,7 +12,9 @@ import java.io.Serializable;
  * @author fengna
  * @date 19/2/23 15:06
  */
+@Data
 @Entity
+@Table(name = "s_user")
 public class UserEntity implements Serializable {
 
     private static final long serialVersionUID = -1715052174602368831L;

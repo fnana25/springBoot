@@ -9,10 +9,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author fengna
  * @date 2019/02/23 15:13
  */
-public interface UserRepository extends JpaRepository<UserEntity,Long> {
+public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
     /**
      * 根据姓名查询
+     *
      * @param name 姓名
      * @return user实体
      */
@@ -20,9 +21,10 @@ public interface UserRepository extends JpaRepository<UserEntity,Long> {
 
     /**
      * 根据姓名或email查询
-     * @param name 姓名
+     *
+     * @param name  姓名
      * @param email 邮箱
      * @return user实体
      */
-    UserEntity findByNameOrEmail(String name,String email);
+    UserEntity findByNameOrEmail(String name, String email);
 }
