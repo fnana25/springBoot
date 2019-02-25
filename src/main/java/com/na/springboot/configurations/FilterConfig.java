@@ -41,7 +41,7 @@ public class FilterConfig {
         public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
 
             HttpServletRequest request = (HttpServletRequest) servletRequest;
-            System.out.println("this is MyFilter,url :" + request.getRequestURI());
+            System.out.println("Request url :" + request.getRequestURI());
             filterChain.doFilter(servletRequest, servletResponse);
         }
     }
