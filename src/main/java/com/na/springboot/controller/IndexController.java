@@ -21,8 +21,11 @@ import org.springframework.web.bind.annotation.*;
 @Api(description = "首页相关API")
 public class IndexController {
 
-    @Value("${com.na.title")
+    @Value("${com.na.title}")
     private String title;
+
+    @Value("${com.na.description}")
+    private String description;
 
     @Autowired
     private UserService userService;
@@ -35,7 +38,7 @@ public class IndexController {
     @ApiOperation(value="首页", notes="首页展示")
     public String index(){
 
-        return "index";
+        return title+"-"+description+"-index";
     }
 
     /**
