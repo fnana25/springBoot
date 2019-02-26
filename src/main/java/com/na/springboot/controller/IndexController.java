@@ -1,5 +1,6 @@
 package com.na.springboot.controller;
 
+import com.na.springboot.configurations.UserConfigTest;
 import com.na.springboot.services.UserService;
 import com.na.springboot.services.models.User;
 import io.swagger.annotations.*;
@@ -26,6 +27,9 @@ public class IndexController {
 
     @Value("${com.na.description}")
     private String description;
+
+    @Autowired
+    private UserConfigTest userConfigTest;
 
     @Autowired
     private UserService userService;
@@ -57,10 +61,27 @@ public class IndexController {
         return userService.findById(id);
     }
 
+    /**
+     * 获取用户信息
+     * @param name 姓名
+     * @return user
+     */
     @GetMapping("user")
     @ApiOperation("获取用户信息")
     public User getUser(@ApiParam(value = "姓名",required = true) @RequestParam(value = "name") String name){
 
         return userService.findByName(name);
+    }
+
+    /**
+     * 从配置文件获取对象配置测试
+     * @return userConfigTest
+     */
+    @GetMapping("user-config-test")
+    @ApiOperation("从配置文件获取对象配置测试")
+    public UserConfigTest userConfigTest(){
+
+        System.out.println(userConfigTest);
+        return userConfigTest;
     }
 }

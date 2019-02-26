@@ -4,7 +4,6 @@ spring:
      username: root
      password: 123456
      driver-class-name: com.mysql.cj.jdbc.Driver
-
   jpa:
      properties:
         hibernate:
@@ -15,5 +14,24 @@ spring:
 
 com:
   na:
-     title: na娜
+     title: nana
      description: springboot
+     #title: "na \n na"  使用""时特殊字符会转义
+     #description: 'spring \n boot' 特殊字符不会转义
+server:
+  port: 8090
+
+user:
+  id: 1
+  name: 张三
+  age: 35
+  birthday: 2018/07/11
+  tastes:
+  - movie
+  - football
+  - swimming
+  cities: {birthCity: chongqing,liveCity: beijing}
+  child:
+    id: 2
+    name: xiaoming
+    age: 5
