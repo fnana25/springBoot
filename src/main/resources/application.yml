@@ -1,3 +1,6 @@
+server:
+  port: 8090
+
 spring:
   datasource:
      url: jdbc:mysql://localhost:3306/springboot?useUnicode=true&charset=utf8mb4&autoReconnect=true
@@ -12,15 +15,15 @@ spring:
          dialect: org.hibernate.dialect.MySQL5InnoDBDialect
      show-sql: true
 
+#普通字符串配置
 com:
   na:
-     title: nana
-     description: springboot
-     #title: "na \n na"  使用""时特殊字符会转义
-     #description: 'spring \n boot' 特殊字符不会转义
-server:
-  port: 8090
+    title: nana
+    description: springboot
+    #title: "na \n na"  使用""时特殊字符会转义
+    #description: 'spring \n boot' 特殊字符不会转义
 
+#对象配置
 user:
   id: 1
   name: 张三
@@ -35,3 +38,9 @@ user:
     id: 2
     name: xiaoming
     age: 5
+
+
+############yml文件支持的数据结构有三种#########################
+#对象：键值对的集合，又称为映射（mapping）/ 哈希（hashes） / 字典（dictionary）
+#数组：一组按次序排列的值，又称为序列（sequence） / 列表（list）
+#纯量（scalars）：单个的、不可再分的值
