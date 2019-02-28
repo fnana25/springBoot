@@ -6,6 +6,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 用户dao
@@ -32,7 +35,6 @@ public interface UserRepository extends JpaRepository<UserEntity, Long>, JpaSpec
      */
     UserEntity findByNameOrEmail(String name, String email);
 
-
     /**
      * 按姓名分页查询
      *
@@ -41,4 +43,34 @@ public interface UserRepository extends JpaRepository<UserEntity, Long>, JpaSpec
      * @return 分页数据
      */
     Page<UserEntity> findByName(String name, Pageable pageable);
+
+    /**
+     * 根据id和姓名修改
+     *
+     * @param id   主键
+     * @param name 姓名
+     */
+    @Modifying
+    @Query("update UserEntity u set u.id = ?1 where u.name = ?2")
+    void updateByIdAndName(Long id, String name);
+
+    /**
+     * 根据id删除
+     *
+     * @param id 主键
+     */
+    @Transactional(rollbackFor = Exception.class)
+    @Modifying
+    @Query("delete from UserEntity where id = ?1")
+    void removeById(Long id);
+
+    /**
+     * 根据邮箱查询
+     *
+     * @param email 邮箱
+     * @return user
+     */
+    @Transactional(timeout = 10, rollbackFor = Exception.class)
+    @Query("select u from UserEntity u where u.email = ?1")
+    User selectByEmail(String email);
 }
