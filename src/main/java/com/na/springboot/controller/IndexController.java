@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
+import java.util.UUID;
+
 
 /**
  * 首页
@@ -97,5 +100,21 @@ public class IndexController {
 
         System.out.println("没有从缓存获取");
         return userService.findByName(name);
+    }
+
+    /**
+     * redis session共享测试
+     * @param session 会话
+     * @return sessionId
+     */
+    @RequestMapping("session-test")
+    @ApiOperation("redis session共享测试")
+    public String uid(HttpSession session) {
+        UUID uid = (UUID) session.getAttribute("uid");
+        if (uid == null) {
+            uid = UUID.randomUUID();
+        }
+        session.setAttribute("uid", uid);
+        return session.getId();
     }
 }
