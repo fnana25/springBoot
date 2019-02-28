@@ -7,6 +7,7 @@ import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -83,5 +84,18 @@ public class IndexController {
 
         System.out.println(userConfigTest);
         return userConfigTest;
+    }
+
+    /**
+     * 从缓存中获取user
+     * @return userRedisTest
+     */
+    @GetMapping("user-redis-test")
+    @Cacheable(value="com.na.springboot")
+    @ApiOperation("从缓存中获取user")
+    public User userRedisTest(@ApiParam(value = "姓名",required = true) @RequestParam(value = "name") String name){
+
+        System.out.println("没有从缓存获取");
+        return userService.findByName(name);
     }
 }

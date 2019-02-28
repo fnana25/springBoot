@@ -5,17 +5,17 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
- * Demo class
+ * 启动类
  *
  * @author fengna
  * @date 2019/02/20
  */
-@SpringBootApplication
 @EnableSwagger2
+@SpringBootApplication
 public class Application {
 
-	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
+    }
 
 }
