@@ -8,9 +8,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.UUID;
 
 
@@ -40,17 +45,19 @@ public class IndexController {
 
     /**
      * 首页
+     *
      * @return hello
      */
     @GetMapping
-    @ApiOperation(value="首页", notes="首页展示")
-    public String index(){
+    @ApiOperation(value = "首页", notes = "首页展示")
+    public String index() {
 
-        return title+"-"+description+"-index";
+        return title + "-" + description + "-index";
     }
 
     /**
      * 获取user
+     *
      * @return user
      */
     @GetMapping("user/{id}")
@@ -60,30 +67,32 @@ public class IndexController {
             @ApiResponse(code = 400, message = "参数有误"),
             @ApiResponse(code = 404, message = "路径有误")
     })
-    public User getUser(@PathVariable("id") Long id){
+    public User getUser(@PathVariable("id") Long id) {
 
         return userService.findById(id);
     }
 
     /**
      * 获取用户信息
+     *
      * @param name 姓名
      * @return user
      */
     @GetMapping("user")
     @ApiOperation("获取用户信息")
-    public User getUser(@ApiParam(value = "姓名",required = true) @RequestParam(value = "name") String name){
+    public User getUser(@ApiParam(value = "姓名", required = true) @RequestParam(value = "name") String name) {
 
         return userService.findByName(name);
     }
 
     /**
      * 从配置文件获取对象配置测试
+     *
      * @return userConfigTest
      */
     @GetMapping("user-config-test")
     @ApiOperation("从配置文件获取对象配置测试")
-    public UserConfigTest userConfigTest(){
+    public UserConfigTest userConfigTest() {
 
         System.out.println(userConfigTest);
         return userConfigTest;
@@ -91,12 +100,13 @@ public class IndexController {
 
     /**
      * 从缓存中获取user
+     *
      * @return userRedisTest
      */
     @GetMapping("user-redis-test")
-    @Cacheable(value="com.na.springboot")
+    @Cacheable(value = "com.na.springboot")
     @ApiOperation("从缓存中获取user")
-    public User userRedisTest(@ApiParam(value = "姓名",required = true) @RequestParam(value = "name") String name){
+    public User userRedisTest(@ApiParam(value = "姓名", required = true) @RequestParam(value = "name") String name) {
 
         System.out.println("没有从缓存获取");
         return userService.findByName(name);
@@ -104,6 +114,7 @@ public class IndexController {
 
     /**
      * redis session共享测试
+     *
      * @param session 会话
      * @return sessionId
      */
@@ -116,5 +127,18 @@ public class IndexController {
         }
         session.setAttribute("uid", uid);
         return session.getId();
+    }
+
+    /**
+     * 分页测试
+     *
+     * @return 分页数据
+     */
+    @GetMapping("page-user")
+    @ApiOperation("分页测试")
+    public List<User> pageUser(@PageableDefault(value = 8, sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable) {
+
+        return userService.findAll(pageable);
+       // return userService.pageByName("fengna",pageable);
     }
 }

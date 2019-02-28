@@ -1,9 +1,13 @@
 package com.na.springboot.services;
 
 import com.na.springboot.services.models.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+import java.util.List;
 
 /**
- * Demo class
+ * 用户服务
  *
  * @author fengna
  * @date 19/2/23 16:51
@@ -34,4 +38,21 @@ public interface UserService {
      * @return user
      */
     User findByNameOrEmail(String name, String email);
+
+    /**
+     * 分页查询
+     *
+     * @param pageable 分页
+     * @return 分页数据
+     */
+    List<User> findAll(Pageable pageable);
+
+    /**
+     * 按姓名分页查询
+     *
+     * @param name     姓名
+     * @param pageable 分页
+     * @return 分页数据
+     */
+    List<User> pageByName(String name, Pageable pageable);
 }
