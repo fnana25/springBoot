@@ -55,4 +55,20 @@ public interface UserService {
      * @return 分页数据
      */
     List<User> pageByName(String name, Pageable pageable);
+
+    /**
+     * 自定义sql更新
+     *
+     * @param id   主键
+     * @param name 姓名
+     */
+    void updateByIdAndName(Long id, String name);
+
+    /**
+     * 根据id删除
+     *
+     * @param id 主键
+     */
+    void removeById(Long id);
+
 }

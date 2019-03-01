@@ -83,4 +83,16 @@ public class UserServerImpl implements UserService {
         );
         return res;
     }
+
+    @Override
+    public void updateByIdAndName(Long id, String name) {
+
+        userRepository.updateByIdAndName(id,name);
+    }
+
+    @Override
+    public void removeById(Long id) {
+
+        userRepository.removeById(id);
+    }
 }

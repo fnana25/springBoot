@@ -117,7 +117,7 @@ public class IndexController {
      * @param session 会话
      * @return sessionId
      */
-    @RequestMapping("session-test")
+    @GetMapping("session-test")
     @ApiOperation("redis session共享测试")
     public String uid(HttpSession session) {
         UUID uid = (UUID) session.getAttribute("uid");
@@ -138,6 +138,35 @@ public class IndexController {
     public List<User> pageUser(@PageableDefault(value = 8, sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable) {
 
         return userService.findAll(pageable);
-       // return userService.pageByName("fengna",pageable);
+        // return userService.pageByName("fengna",pageable);
+    }
+
+    /**
+     * 更新姓名
+     *
+     * @param id   主键
+     * @param name 姓名
+     * @return 是否更新
+     */
+    @PostMapping("update/{id}")
+    @ApiOperation("更新姓名")
+    public Boolean updateName(@PathVariable("id") Long id, @ApiParam(value = "name", required = true) @RequestParam("name") String name) {
+
+        userService.updateByIdAndName(id, name);
+        return Boolean.TRUE;
+    }
+
+    /**
+     * 删除用户
+     *
+     * @param id 主键
+     * @return 是否删除
+     */
+    @PostMapping("remove/{id}")
+    @ApiOperation("删除用户")
+    public Boolean removeUser(@PathVariable("id") Long id) {
+
+        userService.removeById(id);
+        return Boolean.TRUE;
     }
 }

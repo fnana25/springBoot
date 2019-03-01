@@ -1,7 +1,6 @@
 package com.na.springboot.dao;
 
 import com.na.springboot.entities.UserEntity;
-import com.na.springboot.services.models.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -51,7 +50,8 @@ public interface UserRepository extends JpaRepository<UserEntity, Long>, JpaSpec
      * @param name 姓名
      */
     @Modifying
-    @Query("update UserEntity u set u.id = ?1 where u.name = ?2")
+    @Transactional(rollbackFor = Exception.class)
+    @Query("update UserEntity u set u.name = ?2 where u.id = ?1")
     void updateByIdAndName(Long id, String name);
 
     /**
@@ -59,18 +59,9 @@ public interface UserRepository extends JpaRepository<UserEntity, Long>, JpaSpec
      *
      * @param id 主键
      */
-    @Transactional(rollbackFor = Exception.class)
     @Modifying
+    @Transactional(rollbackFor = Exception.class)
     @Query("delete from UserEntity where id = ?1")
     void removeById(Long id);
 
-    /**
-     * 根据邮箱查询
-     *
-     * @param email 邮箱
-     * @return user
-     */
-    @Transactional(timeout = 10, rollbackFor = Exception.class)
-    @Query("select u from UserEntity u where u.email = ?1")
-    User selectByEmail(String email);
 }
