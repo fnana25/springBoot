@@ -26,7 +26,7 @@ import java.util.UUID;
  */
 @Slf4j
 @RestController
-@RequestMapping("index")
+@RequestMapping("index/user")
 @Api(description = "首页相关API")
 public class IndexController {
 
@@ -43,7 +43,7 @@ public class IndexController {
     private UserService userService;
 
     /**
-     * 首页
+     * 配置获取值测试
      *
      * @return hello
      */
@@ -55,31 +55,31 @@ public class IndexController {
     }
 
     /**
-     * 获取user
+     * 根据id获取用户信息
      *
      * @return user
      */
-    @GetMapping("user/{id}")
+    @GetMapping("{id}")
     @ApiOperation("获取用户详细信息")
     @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "Long", paramType = "path")
     @ApiResponses({
             @ApiResponse(code = 400, message = "参数有误"),
             @ApiResponse(code = 404, message = "路径有误")
     })
-    public User getUser(@PathVariable("id") Long id) {
+    public User findUser(@PathVariable("id") Long id) {
 
         return userService.findById(id);
     }
 
     /**
-     * 获取用户信息
+     * 根据姓名获取用户信息
      *
      * @param name 姓名
      * @return user
      */
-    @GetMapping("user")
+    @GetMapping("{name}")
     @ApiOperation("获取用户信息")
-    public User getUser(@ApiParam(value = "姓名", required = true) @RequestParam(value = "name") String name) {
+    public User findUser(@PathVariable("name") String name) {
 
         return userService.findByName(name);
     }
@@ -87,9 +87,9 @@ public class IndexController {
     /**
      * 从配置文件获取对象配置测试
      *
-     * @return userConfigTest
+     * @return 配置对象
      */
-    @GetMapping("user-config-test")
+    @GetMapping("test/config")
     @ApiOperation("从配置文件获取对象配置测试")
     public UserConfigTest userConfigTest() {
 
@@ -102,7 +102,7 @@ public class IndexController {
      *
      * @return userRedisTest
      */
-    @GetMapping("user-redis-test")
+    @GetMapping("test/redis")
     @Cacheable(value = "com.na.springboot")
     @ApiOperation("从缓存中获取user")
     public User userRedisTest(@ApiParam(value = "姓名", required = true) @RequestParam(value = "name") String name) {
@@ -117,7 +117,7 @@ public class IndexController {
      * @param session 会话
      * @return sessionId
      */
-    @GetMapping("session-test")
+    @GetMapping("test/redis-session")
     @ApiOperation("redis session共享测试")
     public String uid(HttpSession session) {
         UUID uid = (UUID) session.getAttribute("uid");
@@ -129,12 +129,12 @@ public class IndexController {
     }
 
     /**
-     * 分页测试
+     * 分页查询
      *
      * @return 分页数据
      */
-    @GetMapping("page-user")
-    @ApiOperation("分页测试")
+    @GetMapping("page")
+    @ApiOperation("分页查询")
     public List<User> pageUser(@PageableDefault(value = 8, sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable) {
 
         return userService.findAll(pageable);
