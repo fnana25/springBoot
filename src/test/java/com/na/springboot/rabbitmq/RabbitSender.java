@@ -1,4 +1,4 @@
-package com.na.springboot.controller;
+package com.na.springboot.rabbitmq;
 
 import com.na.springboot.services.models.User;
 import lombok.extern.slf4j.Slf4j;
@@ -33,15 +33,21 @@ public class RabbitSender {
         rabbitTemplate.convertAndSend("object", user);
     }
 
-    public void topicSendMessage() {
+    public void sendTopicMessage() {
         String context = "hi,i'm here！" + new Date();
         log.info("send topic : {}" + context);
         rabbitTemplate.convertAndSend("na", "na.message", context);
     }
 
-    public void topicSendMessages() {
+    public void sendTopicMessages() {
         String context = "hi,i'm here!!" + new Date();
         log.info("send topic : {}", context);
         rabbitTemplate.convertAndSend("na", "na.messages", context);
+    }
+
+    public void sendFanoutMessage(){
+        String context = "hello world! "+new Date();
+        log.info("send fanout : {}"+context);
+        rabbitTemplate.convertAndSend("fanoutExchange","",context);
     }
 }

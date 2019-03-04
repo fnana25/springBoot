@@ -1,4 +1,4 @@
-package com.na.springboot.controller;
+package com.na.springboot.rabbitmq;
 
 import com.na.springboot.services.models.User;
 import lombok.extern.slf4j.Slf4j;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
  */
 @Slf4j
 @Component
-public class RabbitReceiver1 {
+public class RabbitReceiverOne {
 
     @RabbitListener(queues = "hello")
     public void receive(String context){
@@ -33,5 +33,20 @@ public class RabbitReceiver1 {
     @RabbitListener(queues = "na.messages")
     public void receiveTopicMessages(String context) {
         System.out.println("Receive messagesQueue context : " + context);
+    }
+
+    @RabbitListener(queues = "fanout.A")
+    public void receiveFanoutQueueA(String context){
+        System.out.println("Receive fanout queueA context : " + context);
+    }
+
+    @RabbitListener(queues = "fanout.B")
+    public void receiveFanoutQueueB(String context){
+        System.out.println("Receive fanout queueB context : " + context);
+    }
+
+    @RabbitListener(queues = "fanout.C")
+    public void receiveFanoutQueueC(String context){
+        System.out.println("Receive fanout queueC context : " + context);
     }
 }

@@ -1,4 +1,4 @@
-package com.na.springboot.configurations;
+package com.na.springboot.configurations.rabbitmq;
 
 import org.springframework.amqp.core.Queue;
 import org.springframework.context.annotation.Bean;

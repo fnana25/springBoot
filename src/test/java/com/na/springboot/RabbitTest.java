@@ -1,6 +1,6 @@
 package com.na.springboot;
 
-import com.na.springboot.controller.RabbitSender;
+import com.na.springboot.rabbitmq.RabbitSender;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +42,12 @@ public class RabbitTest {
 
     @Test
     public void sendTopicMessage(){
-        rabbitSender.topicSendMessage();
-        rabbitSender.topicSendMessages();
+        rabbitSender.sendTopicMessage();
+        rabbitSender.sendTopicMessages();
+    }
+
+    @Test
+    public void sendFanoutMessage(){
+        rabbitSender.sendFanoutMessage();
     }
 }

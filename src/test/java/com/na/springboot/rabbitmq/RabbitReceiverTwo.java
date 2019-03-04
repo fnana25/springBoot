@@ -1,4 +1,4 @@
-package com.na.springboot.controller;
+package com.na.springboot.rabbitmq;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @RabbitListener(queues = "hello")
-public class RabbitReceiver2 {
+public class RabbitReceiverTwo {
 
     @RabbitHandler
     public void receive(String context){
