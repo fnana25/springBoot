@@ -21,6 +21,13 @@ spring:
             auto: update
          dialect: org.hibernate.dialect.MySQL5InnoDBDialect
      show-sql: true
+  mail:
+    host: smtp.qq.com
+    username: fengna
+    password: iksnhnjgwqiwbegc
+    default-encoding: UTF-8
+  fromMail:
+    address: 692098869@qq.com
 #普通字符串配置
 com:
   na:
