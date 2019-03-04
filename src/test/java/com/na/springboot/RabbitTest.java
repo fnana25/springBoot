@@ -39,4 +39,10 @@ public class RabbitTest {
 
         rabbitSender.sendUser(new User(20L,"fengna22","6900423@qq.com"));
     }
+
+    @Test
+    public void sendTopicMessage(){
+        rabbitSender.topicSendMessage();
+        rabbitSender.topicSendMessages();
+    }
 }

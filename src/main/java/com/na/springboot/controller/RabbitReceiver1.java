@@ -21,8 +21,17 @@ public class RabbitReceiver1 {
     }
 
     @RabbitListener(queues = "object")
-    public void process(User user) {
-        System.out.println("Receiver object : " + user);
+    public void receiveUser(User user) {
+        System.out.println("Receive object : " + user);
     }
 
+    @RabbitListener(queues = "na.message")
+    public void receiveTopicMessage(String context) {
+        System.out.println("Receive messageQueue context : " + context);
+    }
+
+    @RabbitListener(queues = "na.messages")
+    public void receiveTopicMessages(String context) {
+        System.out.println("Receive messagesQueue context : " + context);
+    }
 }
