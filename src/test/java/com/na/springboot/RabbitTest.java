@@ -6,7 +6,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
+import com.na.springboot.services.models.User;
 import java.util.Date;
 
 /**
@@ -32,5 +32,11 @@ public class RabbitTest {
         for (int i = 0; i < 100; i++) {
             rabbitSender.send("hello : " + i);
         }
+    }
+
+    @Test
+    public void sendUser(){
+
+        rabbitSender.sendUser(new User(20L,"fengna22","6900423@qq.com"));
     }
 }

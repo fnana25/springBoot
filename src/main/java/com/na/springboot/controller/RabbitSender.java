@@ -1,5 +1,6 @@
 package com.na.springboot.controller;
 
+import com.na.springboot.services.models.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,5 +23,11 @@ public class RabbitSender {
 
         log.info("send : " + context);
         rabbitTemplate.convertAndSend("hello",context);
+    }
+
+    public void sendUser(User user){
+
+        log.info("send : "+ user.toString());
+        rabbitTemplate.convertAndSend("object",user);
     }
 }

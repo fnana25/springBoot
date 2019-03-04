@@ -1,7 +1,7 @@
 package com.na.springboot.controller;
 
+import com.na.springboot.services.models.User;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
@@ -13,11 +13,16 @@ import org.springframework.stereotype.Component;
  */
 @Slf4j
 @Component
-@RabbitListener(queues = "hello")
 public class RabbitReceiver1 {
 
-    @RabbitHandler
+    @RabbitListener(queues = "hello")
     public void receive(String context){
         log.info("receive1 : {}",context);
     }
+
+    @RabbitListener(queues = "object")
+    public void process(User user) {
+        System.out.println("Receiver object : " + user);
+    }
+
 }
