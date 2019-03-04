@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Date;
+
 /**
  * rabbit 测试
  *
@@ -21,7 +23,14 @@ public class RabbitTest {
     private RabbitSender rabbitSender;
 
     @Test
-    public void sender(){
-        rabbitSender.send();
+    public void sender() {
+        rabbitSender.send("hello : " + new Date());
+    }
+
+    @Test
+    public void mutiReceiverTest() {
+        for (int i = 0; i < 100; i++) {
+            rabbitSender.send("hello : " + i);
+        }
     }
 }

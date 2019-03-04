@@ -5,8 +5,6 @@ import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.Date;
-
 /**
  *  消息发送者
  *
@@ -20,9 +18,8 @@ public class RabbitSender {
     @Autowired
     private AmqpTemplate rabbitTemplate;
 
-    public void send(){
+    public void send(String context){
 
-        String context = "hello : " + new Date();
         log.info("send : " + context);
         rabbitTemplate.convertAndSend("hello",context);
     }
