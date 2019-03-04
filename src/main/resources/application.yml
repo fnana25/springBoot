@@ -13,7 +13,7 @@ spring:
      url: jdbc:mysql://localhost:3306/springboot?useUnicode=true&charset=utf8mb4&autoReconnect=true
      username: root
      password: 123456
-     driver-class-name: com.mysql.cj.jdbc.Driver
+     driver-class-name: com.mysql.jdbc.Driver
   jpa:
      properties:
         hibernate:
@@ -21,7 +21,6 @@ spring:
             auto: update
          dialect: org.hibernate.dialect.MySQL5InnoDBDialect
      show-sql: true
-
 #普通字符串配置
 com:
   na:
