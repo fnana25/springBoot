@@ -22,10 +22,11 @@ spring:
          dialect: org.hibernate.dialect.MySQL5InnoDBDialect
      show-sql: true
   mail:
-    host: smtp.qq.com
-    username: fengna
-    password: iksnhnjgwqiwbegc
+    host: pop.qq.com
+    username: 692098869@qq.com
+    password: wkumpjtzhwuibegd
     default-encoding: UTF-8
+    port: 995
   fromMail:
     address: 692098869@qq.com
 #普通字符串配置
