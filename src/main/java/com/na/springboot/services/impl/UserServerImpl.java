@@ -93,6 +93,7 @@ public class UserServerImpl implements UserService {
     @Override
     public void removeById(Long id) {
 //11
+        //22
         userRepository.removeById(id);
     }
 }
