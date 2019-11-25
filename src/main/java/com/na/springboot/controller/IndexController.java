@@ -28,7 +28,7 @@ import java.util.UUID;
 @Slf4j
 @RestController
 @RequestMapping("index/user")
-@Api(description = "首页相关API")
+@Api(tags = "首页相关API")
 public class IndexController {
 
     @Value("${com.na.title}")

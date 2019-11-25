@@ -68,7 +68,7 @@ public class UserServerImpl implements UserService {
         Page<UserEntity> page = userRepository.findAll(pageable);
         List<User> res = new ArrayList<>();
         page.getContent().forEach(
-                (e) -> res.add(new User(e.getId(), e.getName(), e.getEmail()))
+                e -> res.add(new User(e.getId(), e.getName(), e.getEmail()))
         );
         return res;
     }
@@ -79,7 +79,7 @@ public class UserServerImpl implements UserService {
         Page<UserEntity> page = userRepository.findByName(name,pageable);
         List<User> res = new ArrayList<>();
         page.getContent().forEach(
-                (e) -> res.add(new User(e.getId(), e.getName(), e.getEmail()))
+                e -> res.add(new User(e.getId(), e.getName(), e.getEmail()))
         );
         return res;
     }
@@ -92,7 +92,7 @@ public class UserServerImpl implements UserService {
 
     @Override
     public void removeById(Long id) {
-
+//11
         userRepository.removeById(id);
     }
 }
